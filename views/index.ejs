@@ -1,0 +1,48 @@
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  
+  </head>
+  
+  <meta charset="UTF-8">
+  <title>Budgtr App</title>
+  
+  <!-- CSS (load bootstrap from a CDN) -->
+  <body>
+    <% var bankAccount= 0
+     for (var i = 0; i < allBudgets.length; i++) {
+        bankAccount += parseInt(allBudgets[i].amount)
+    } %>
+
+    <% if(value < 0); { %>
+        <div>red</div>
+    <% }else if(value>1000); { %>
+        <div>green</div> 
+      <%  else{    %>
+      <div>blue</div> 
+        }
+   <% }; %>
+    
+    <div class ="container">
+    <table>
+        <h3> Budgtr </h3>
+       <h4><%= bankAccount %></h4> 
+        <% for (var i = 0; i < allBudgets.length; i++) { %>
+          <tr>
+            <td><%= allBudgets[i].date %></td>
+            <td><a href="/budgets/<%= i %> ">
+                <%= allBudgets[i].name %></a></td>
+            <td><%= allBudgets[i].amount %></td>
+
+          </tr>
+        <% }; %>
+        
+      </table>
+    </div>
+  <a href ="/budgets/new">create new expense</a>
+  </body>
+  
+  <style>
+  
+  </style>
