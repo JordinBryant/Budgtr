@@ -1,48 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
-  
-  </head>
-  
   <meta charset="UTF-8">
-  <title>Budgtr App</title>
-  
-  <!-- CSS (load bootstrap from a CDN) -->
-  <body>
-    <% var bankAccount= 0
-     for (var i = 0; i < allBudgets.length; i++) {
-        bankAccount += parseInt(allBudgets[i].amount)
-    } %>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budgeter</title>
 
-    <% if(value < 0); { %>
-        <div>red</div>
-    <% }else if(value>1000); { %>
-        <div>green</div> 
-      <%  else{    %>
-      <div>blue</div> 
-        }
-   <% }; %>
-    
-    <div class ="container">
-    <table>
-        <h3> Budgtr </h3>
-       <h4><%= bankAccount %></h4> 
-        <% for (var i = 0; i < allBudgets.length; i++) { %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+
+</head>
+
+<body>
+  <%let bankAccount=budget.reduce((acc, budget)=>{
+    return acc + parseInt(budget.amount);
+    }, 0);%>
+    <div class="container">
+      <h1>BUDGTR</h1>
+      <h2>Balance: <%="$" + bankAccount%>
+      </h2>
+      <table>
+        <% for(let i=0; i < budget.length; i++){%>
           <tr>
-            <td><%= allBudgets[i].date %></td>
-            <td><a href="/budgets/<%= i %> ">
-                <%= allBudgets[i].name %></a></td>
-            <td><%= allBudgets[i].amount %></td>
-
+            <td>
+        <%=budget[i].date%>
+        </td>
+        <td><a href=/budgets/<%=i%>><%=budget[i].name%></a></td>
+        <td>
+              <%="$" + budget[i].amount%>
+            </td>
           </tr>
-        <% }; %>
-        
+          <%}%>
       </table>
+      <nav><a href="/budgets/new">Add another expense</a></nav>
     </div>
-  <a href ="/budgets/new">create new expense</a>
-  </body>
-  
-  <style>
-  
-  </style>
+    <% if (bankAccount> 1000) { %>
+      <style>
+     body {
+       background-color: rgb(19, 58, 114);
+        }
+      </style>
+      <% } else if (bankAccount < 0) { %>
+        <style>
+          body {
+            background-color: rgb(101, 36, 36);
+          }
+        </style>
+        <% } %>
+</body>
+
+</html>
